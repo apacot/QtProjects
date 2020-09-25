@@ -4,21 +4,20 @@ Jeu2048::Jeu2048(): nbCoups(0), score(0)
 {
     srand(time(nullptr));
 
-    for(int i=0;i<4;i++)
+    for(int i=0;i<NB_VAL;i++)
     {
-        for(int j=0;j<4;j++)
+        for(int j=0;j<NB_VAL;j++)
         {
             grille[i][j]=0;
         }
     }
-
     PlacerNouvelleTuile();
-
 }
 
 bool Jeu2048::JouerCoup(char _direction)
 {
     direction = _direction;
+    nbCoups++;
     Deplacer();
     if (Calculer())
     {
@@ -35,7 +34,6 @@ bool Jeu2048::JouerCoup(char _direction)
 
 int Jeu2048::ObtenirNbCoups()
 {
-    nbCoups++;
     return nbCoups;
 }
 
@@ -81,8 +79,7 @@ void Jeu2048::PlacerNouvelleTuile()
     {
         ligne = TirerAleatoire(POSITION);
         colonne = TirerAleatoire(POSITION);
-    }
-    while(grille[ligne][colonne] != 0);
+    }while(grille[ligne][colonne] != 0);
 
     grille[ligne][colonne] = TirerAleatoire(TUILE);
 }
@@ -111,7 +108,7 @@ bool Jeu2048::Calculer()
         case 'D':
         for (int ligne = 0; ligne<NB_VAL;ligne++)
         {
-            for(int colonne = NB_VAL-1;colonne<1;colonne--)
+            for(int colonne = NB_VAL-2;colonne>0;colonne--)
             {
                 if(grille[ligne][colonne] == grille[ligne][colonne-1])
                 {
@@ -126,12 +123,12 @@ bool Jeu2048::Calculer()
         case 'B':
         for(int colonne = 0; colonne < NB_VAL-1;colonne++)
         {
-            for(int ligne = NB_VAL-2;ligne < 1; ligne--)
+            for(int ligne = NB_VAL-2;ligne > 0; ligne--)
             {
                 if(grille[ligne][colonne] == grille[ligne-1][colonne])
                 {
                     grille[ligne][colonne] = grille[ligne][colonne]*2;
-                    grille[ligne][colonne] = 0;
+                    grille[ligne-1][colonne] = 0;
                 }
             }
         }
@@ -206,8 +203,11 @@ void Jeu2048::Deplacer()
             {
                 for(int ligne=0;ligne<NB_VAL-1;ligne++)
                 {
-                    grille[ligne][colonne] = grille[ligne+1][colonne];
-                    grille[ligne+1][colonne] = 0;
+                    if(grille[ligne][colonne] == 0)
+                    {
+                        grille[ligne][colonne] = grille[ligne+1][colonne];
+                        grille[ligne+1][colonne] = 0;
+                    }
                 }
             }
             break;
