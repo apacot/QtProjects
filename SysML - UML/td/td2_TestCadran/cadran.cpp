@@ -54,12 +54,24 @@ Cadran::~Cadran()
  * @param _valeur   : Entier à afficher
  * @param _position : Position du premier caractère par défaut 0 pour le premier caractère
  */
-void Cadran::Afficher(const int _valeur, const int _position)
+void Cadran::Afficher(const int _valeur, const int _position, const int _hauteur)
 {
-    PositionnerCurseur(posX,posY + _position);
+    PositionnerCurseur(posX+(_hauteur-1),posY + _position);
     cout << "\e[0;33;42m";
     cout << setfill('0') << setw(2) << _valeur ;
     cout << "\e[0m" << flush;            // Remet à zéro les attributs de couleur
+}
+
+void Cadran::Effacer()
+{
+    PositionnerCurseur(0,0);
+    for(int colonne=0;colonne <largeur; colonne++)
+    {
+        for(int ligne=0;ligne<hauteur; ligne++)
+        {
+            Afficher(" ",colonne,ligne+1);
+        }
+    }
 }
 /**
  * @brief Cadran::Afficher
@@ -67,9 +79,9 @@ void Cadran::Afficher(const int _valeur, const int _position)
  * @param _texte    : Texte à afficher dans le cadran
  * @param _position : Position du premier caractère par défaut 0 pour le premier caractère
  */
-void Cadran::Afficher(const string _texte, const int _position)
+void Cadran::Afficher(const string _texte, const int _position, const int _hauteur)
 {
-    PositionnerCurseur(posX,posY + _position);
+    PositionnerCurseur(posX + (_hauteur-1),posY + _position);
     cout << "\e[0;33;42m";
     cout << _texte ;
     cout << "\e[0m" << flush;            // Remet à zéro les attributs de couleur
