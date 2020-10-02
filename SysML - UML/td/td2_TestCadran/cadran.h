@@ -18,33 +18,33 @@ using namespace std;
 
 enum couleurTexte
 {
-    NOIR = 30,
-    ROUGE,
-    VERT,
-    JAUNE,
-    BLEU,
-    MAGENTA,
-    CYAN,
-    BLANC
+    NOIR_FG = 30, //FG pour frontground donc le texte
+    ROUGE_FG,
+    VERT_FG,
+    JAUNE_FG,
+    BLEU_FG,
+    MAGENTA_FG,
+    CYAN_FG,
+    BLANC_FG
 };
 
 enum couleurFond
 {
-    F_NOIR = 40,
-    F_ROUGE,
-    F_VERT,
-    F_JAUNE,
-    F_BLEU,
-    F_MAGENTA,
-    F_CYAN,
-    F_BLANC
+    NOIR_BG = 40, //BG pour background donc le fond
+    ROUGE_BG,
+    VERT_BG,
+    JAUNE_BG,
+    BLEU_BG,
+    MAGENTA_BG,
+    CYAN_BG,
+    BLANC_BG
 
 };
 
 class Cadran
 {
 public:
-    Cadran(const int _posX=1,const int _posY=1,const int _hauteur=1,const int _largeur=7);
+    Cadran(const int _posX=1,const int _posY=1,const int _hauteur=1,const int _largeur=7, const int _couleurFond = 42 , const int _couleurTexte = 33);
     ~Cadran();
     void Afficher(const string _texte, const int _position=0, const int _hauteur=0);
     void Afficher(const int _valeur, const int _position=0, const int _hauteur=0);
@@ -55,6 +55,8 @@ private:
     int posY;   /// coordonnée en Y du premier caractère dans le cadran
     int hauteur;    /// nombre de lignes du cadran
     int largeur;    /// nombre de caractères par ligne
+    int couleurTexte;
+    int couleurFond;
 };
 
 #endif // CADRAN_H

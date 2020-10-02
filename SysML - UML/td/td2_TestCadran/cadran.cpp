@@ -15,11 +15,13 @@
  * @param _hauteur  :   Nombre de lignes d'affichage du cadran
  * @param _largeur  :   Nombre de caractères par ligne
  */
-Cadran::Cadran(const int _posX, const int _posY, const int _hauteur, const int _largeur):
+Cadran::Cadran(const int _posX, const int _posY, const int _hauteur, const int _largeur, const int _couleurFond, const int _couleurTexte):
     posX(_posX+1),
     posY(_posY+1),
     hauteur(_hauteur),
-    largeur(_largeur)
+    largeur(_largeur),
+    couleurTexte(_couleurTexte),
+    couleurFond(_couleurFond)
 {
     PositionnerCurseur(_posX,_posY);
     cout << '+' <<  setfill('-') << setw(_largeur+1) << '+' << setfill(' ');
@@ -27,7 +29,7 @@ Cadran::Cadran(const int _posX, const int _posY, const int _hauteur, const int _
     {
         PositionnerCurseur(_posX + indice,_posY);
         cout << '+' ;
-        cout << "\e[0;33;42m";  // Fixe la couleur fond en vert et le texte en jaune
+        cout << "\e[0;"<< _couleurTexte <<";"<< _couleurFond << "m";  // Fixe la couleur fond en vert et le texte en jaune
         cout <<  setfill(' ') << setw(_largeur) << ' '  ;
         cout << "\e[0m";        // Remet à zéro les attributs de couleur
         cout << '+' ;
@@ -57,7 +59,7 @@ Cadran::~Cadran()
 void Cadran::Afficher(const int _valeur, const int _position, const int _hauteur)
 {
     PositionnerCurseur(posX+(_hauteur-1),posY + _position);
-    cout << "\e[0;33;42m";
+    cout << "\e[0;"<< couleurTexte <<";"<< couleurFond << "m";  // Fixe la couleur fond en vert et le texte en jaune
     cout << setfill('0') << setw(2) << _valeur ;
     cout << "\e[0m" << flush;            // Remet à zéro les attributs de couleur
 }
@@ -82,7 +84,7 @@ void Cadran::Effacer()
 void Cadran::Afficher(const string _texte, const int _position, const int _hauteur)
 {
     PositionnerCurseur(posX + (_hauteur-1),posY + _position);
-    cout << "\e[0;33;42m";
+    cout << "\e[0;"<< couleurTexte <<";"<< couleurFond << "m";  // Fixe la couleur fond en vert et le texte en jaune
     cout << _texte ;
     cout << "\e[0m" << flush;            // Remet à zéro les attributs de couleur
 }

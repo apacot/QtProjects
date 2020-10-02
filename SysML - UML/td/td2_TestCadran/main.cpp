@@ -3,7 +3,7 @@
 int main()
 {
     Cadran leCadran;
-    Cadran unAutreCadran(10,10,2,20);
+    Cadran unAutreCadran(10,10,2,20,JAUNE_BG,ROUGE_FG);
     string fin="Fin";
     //pour bloquer le programme et que le cadran reste visible
     //char touche;
