@@ -63,10 +63,65 @@ void Horloge::ReculerMinutes()
 
 TOUCHES_CLAVIER Horloge::Controler(TOUCHES_CLAVIER _numTouche)
 {
+    _numTouche = leClavier->ScruterClavier();
+    if(_numTouche == mode)
+    {
+        ChangerMode();
+    }
 
+    switch(mode)
+    {
+    case AUCUN_REGLAGE :
+        ActualiserHeure();
+        leCadran->Afficher(heures,1);
+        leCadran->Afficher(minutes,4);
+        break;
+    case REGLAGE_HEURES :
+        if(_numTouche == PLUS)
+        {
+            AvancerHeures();
+        }
+        if(_numTouche == MOINS)
+        {
+            ReculerHeures();
+        }
+        leCadran->Afficher("HH",1);
+        leCadran->Afficher(heures,4);
+        break;
+    case REGLAGE_MINUTES :
+        if(_numTouche == PLUS)
+        {
+            AvancerMinutes();
+        }
+        if(_numTouche == MOINS)
+        {
+            ReculerMinutes();
+        }
+        leCadran->Afficher("MM",1);
+        leCadran->Afficher(minutes,4);
+        break;
+
+    }
+    return _numTouche;
 }
 
 void Horloge::ChangerMode()
 {
     mode = (mode +1)%nbModes;
+}
+
+void Horloge::ActualiserHeure()
+{
+    time_t valCourante = time(NULL);
+    double seconde = difftime(valCourante, valAvant);
+
+    if(seconde > 1) // à modifier pour aller plus vite pendant le test
+    {
+        valAvant = valCourante;
+        if (AvancerMinutes())
+        {
+            AvancerHeures();
+
+        }
+    }
 }

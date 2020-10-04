@@ -33,6 +33,7 @@ public:
     void ReculerMinutes();
     TOUCHES_CLAVIER Controler(TOUCHES_CLAVIER _numTouche = AUCUNE);
     void ChangerMode();
+    void ActualiserHeure();
 private:
     int heures;
     int minutes;

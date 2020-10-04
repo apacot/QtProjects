@@ -3,10 +3,12 @@
 int main()
 {
     Horloge uneHorloge;
+    TOUCHES_CLAVIER laTouche = AUCUNE;
 
-    while(1);   //pour que le cadran reste affiché -
-
-                //Fermture de la console pour arrêt du programme
+    do
+    {
+        laTouche=uneHorloge.Controler(laTouche);
+    }while (laTouche != FIN);
 
     return 0;
 }
