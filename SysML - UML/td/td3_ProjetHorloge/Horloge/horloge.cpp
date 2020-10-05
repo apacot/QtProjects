@@ -7,11 +7,12 @@
 
 #include "horloge.h"
 
-Horloge::Horloge(const int _nbModes, const int _resolution):heures(0), minutes(0), nbModes(_nbModes), resolution(_resolution)
+Horloge::Horloge(const int _nbModes, const int _resolution):heures(0), minutes(0), resolution(_resolution), nbModes(_nbModes)
 {
     leCadran = new Cadran(5, 5);
     leClavier = new Clavier();
     valAvant = time(NULL);
+    mode = AUCUN_REGLAGE;
 }
 
 Horloge::~Horloge()
@@ -25,16 +26,12 @@ bool Horloge::AvancerHeures()
     bool retour = false;
 
     heures++;
-    if(resolution == 12 && heures == 12)
+    if(resolution == heures) //resolution = 12 ou 24
     {
         heures = 0;
         retour = true;
     }
-    if(resolution == 24 && heures == 24)
-    {
-        heures = 0;
-        retour = true;
-    }
+    return retour;
 }
 
 bool Horloge::AvancerMinutes()
@@ -44,7 +41,6 @@ bool Horloge::AvancerMinutes()
     minutes++;
     if(minutes == 60)
     {
-        heures++;
         minutes = 0;
         retour = true;
     }
@@ -64,7 +60,7 @@ void Horloge::ReculerMinutes()
 TOUCHES_CLAVIER Horloge::Controler(TOUCHES_CLAVIER _numTouche)
 {
     _numTouche = leClavier->ScruterClavier();
-    if(_numTouche == mode)
+    if(_numTouche == MODE)
     {
         ChangerMode();
     }

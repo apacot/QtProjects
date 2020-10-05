@@ -46,8 +46,8 @@ class Cadran
 public:
     Cadran(const int _posX=1,const int _posY=1,const int _hauteur=1,const int _largeur=7, const int _couleurFond = 42 , const int _couleurTexte = 33);
     ~Cadran();
-    void Afficher(const string _texte, const int _position=0, const int _hauteur=0);
-    void Afficher(const int _valeur, const int _position=0, const int _hauteur=0);
+    void Afficher(const string _texte, const int _position=0, const int _hauteur=1);
+    void Afficher(const int _valeur, const int _position=0, const int _hauteur=1);
     void Effacer();
 private:
     void PositionnerCurseur(const int _posx, const int _posy);

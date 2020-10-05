@@ -58,7 +58,7 @@ Cadran::~Cadran()
  */
 void Cadran::Afficher(const int _valeur, const int _position, const int _hauteur)
 {
-    PositionnerCurseur(posX+(_hauteur-1),posY + _position);
+    PositionnerCurseur(posX+(_hauteur),posY + _position);
     cout << "\e[0;"<< couleurTexte <<";"<< couleurFond << "m";  // Fixe la couleur fond en vert et le texte en jaune
     cout << setfill('0') << setw(2) << _valeur ;
     cout << "\e[0m" << flush;            // Remet à zéro les attributs de couleur
@@ -83,7 +83,7 @@ void Cadran::Effacer()
  */
 void Cadran::Afficher(const string _texte, const int _position, const int _hauteur)
 {
-    PositionnerCurseur(posX + (_hauteur-1),posY + _position);
+    PositionnerCurseur(posX + (_hauteur),posY + _position);
     cout << "\e[0;"<< couleurTexte <<";"<< couleurFond << "m";  // Fixe la couleur fond en vert et le texte en jaune
     cout << _texte ;
     cout << "\e[0m" << flush;            // Remet à zéro les attributs de couleur

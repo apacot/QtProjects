@@ -8,7 +8,7 @@
 #ifndef CLAVIER_H
 #define CLAVIER_H
 
-#include <termios.h>
+#include <termios.h> //sous  windows --> <conio.h> --> fonction kbhit
 #include <unistd.h>
 #include <iostream>
 
