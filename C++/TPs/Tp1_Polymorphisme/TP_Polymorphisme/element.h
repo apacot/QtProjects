@@ -9,6 +9,7 @@
 #define ELEMENT_H
 
 #include <iostream>
+#include "vecteur.h"
 
 using namespace std;
 
@@ -21,6 +22,9 @@ public:
     Element(int _numero = 0, int _vitesse = 0);
     virtual ~Element();
     virtual void Afficher();
+    virtual int ObtenirLongueur();
+    virtual int ObtenirDuree();
+    virtual Vecteur ObtenirVecteurArivee();
     int getNumero() const;
     void setNumero(int value);
     int getVitesse() const;
