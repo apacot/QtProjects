@@ -4,7 +4,6 @@
   @author Antoine Pacot
   @date 15/10/2020
   */
-
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
@@ -21,10 +20,10 @@ protected:
 public:
     Element(int _numero = 0, int _vitesse = 0);
     virtual ~Element();
-    virtual void Afficher();
-    virtual int ObtenirLongueur();
-    virtual int ObtenirDuree();
-    virtual Vecteur ObtenirVecteurArivee();
+    virtual void Afficher()=0;
+    virtual int ObtenirLongueur()=0;
+    virtual int ObtenirDuree()=0;
+    virtual Vecteur ObtenirVecteurArrivee()=0;
     int getNumero() const;
     void setNumero(int value);
     int getVitesse() const;

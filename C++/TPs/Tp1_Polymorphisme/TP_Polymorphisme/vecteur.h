@@ -1,7 +1,7 @@
 #ifndef VECTEUR_H
 #define VECTEUR_H
 
-#include "element.h"
+#include <iostream>
 
 class Vecteur
 {
@@ -9,9 +9,9 @@ private:
     double x;
     double y;
 public:
-    Vecteur(double _x, string _y);
-    Vecteur operator+(string _autre);
-    Vecteur operator-(string _autre);
+    Vecteur(double _x, double _y);
+    Vecteur operator+(Vecteur &_autre);
+    Vecteur operator-(Vecteur &_autre);
     void Afficher();
     double getX() const;
     void setX(double value);

@@ -20,6 +20,9 @@ private:
 public:
     Segment(double _longueur, double _angle, int _numero, int _vitesse);
     void Afficher();
+    virtual int ObtenirLongueur();
+    virtual int ObtenirDuree();
+    virtual Vecteur ObtenirVecteurArrivee();
 };
 
 #endif // SEGMENT_H

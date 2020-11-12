@@ -1,8 +1,15 @@
 #include "vecteur.h"
 
-Vecteur::Vecteur()
+using namespace std;
+
+Vecteur::Vecteur(double _x, double _y):x(_x),y(_y)
 {
 
+}
+
+void Vecteur::Afficher()
+{
+    cout << "x :" << x <<endl << "y :" << y << endl;
 }
 
 double Vecteur::getY() const
