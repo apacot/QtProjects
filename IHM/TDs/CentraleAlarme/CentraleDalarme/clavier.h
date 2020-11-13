@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QTimer>
 #include "detecteur.h"
+#include "detecteurtemporise.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Clavier; }
@@ -28,9 +29,14 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
 private:
     Ui::Clavier *ui;
     QTimer timerLed;
     Detecteur *leDetecteur;
+    DetecteurTemporise *leDetecteurTempo;
 };
 #endif // CLAVIER_H

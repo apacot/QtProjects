@@ -53,10 +53,12 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../CentraleDalarme/detecteur.cpp \
+		../CentraleDalarme/detecteurtemporise.cpp \
 		../CentraleDalarme/main.cpp \
 		../CentraleDalarme/clavier.cpp moc_clavier.cpp \
 		moc_detecteur.cpp
 OBJECTS       = detecteur.o \
+		detecteurtemporise.o \
 		main.o \
 		clavier.o \
 		moc_clavier.o \
@@ -267,7 +269,9 @@ DIST          = /opt/Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.15.0/gcc_64/mkspecs/features/lex.prf \
 		../CentraleDalarme/CentraleDalarme.pro ../CentraleDalarme/clavier.h \
-		../CentraleDalarme/detecteur.h ../CentraleDalarme/detecteur.cpp \
+		../CentraleDalarme/detecteur.h \
+		../CentraleDalarme/detecteurtemporise.h ../CentraleDalarme/detecteur.cpp \
+		../CentraleDalarme/detecteurtemporise.cpp \
 		../CentraleDalarme/main.cpp \
 		../CentraleDalarme/clavier.cpp
 QMAKE_TARGET  = CentraleDalarme
@@ -709,8 +713,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.15.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../CentraleDalarme/clavier.h ../CentraleDalarme/detecteur.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../CentraleDalarme/detecteur.cpp ../CentraleDalarme/main.cpp ../CentraleDalarme/clavier.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../CentraleDalarme/clavier.h ../CentraleDalarme/detecteur.h ../CentraleDalarme/detecteurtemporise.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../CentraleDalarme/detecteur.cpp ../CentraleDalarme/detecteurtemporise.cpp ../CentraleDalarme/main.cpp ../CentraleDalarme/clavier.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../CentraleDalarme/clavier.ui ../CentraleDalarme/detecteur.ui $(DISTDIR)/
 	$(COPY_FILE) --parents CentraleDalarme_fr_FR.ts $(DISTDIR)/
 
@@ -857,6 +861,8 @@ moc_clavier.cpp: ../CentraleDalarme/clavier.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QTimer \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qtimer.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qbasictimer.h \
+		../CentraleDalarme/detecteur.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog \
 		moc_predefs.h \
 		/opt/Qt/5.15.0/gcc_64/bin/moc
 	/opt/Qt/5.15.0/gcc_64/bin/moc $(DEFINES) --include /home/USERS/ELEVES/SNIR2019/apacot/Documents/QtProjects/IHM/TDs/CentraleAlarme/build-CentraleDalarme-Desktop_Qt_5_15_0_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++ -I/home/USERS/ELEVES/SNIR2019/apacot/Documents/QtProjects/IHM/TDs/CentraleAlarme/CentraleDalarme -I/opt/Qt/5.15.0/gcc_64/include -I/opt/Qt/5.15.0/gcc_64/include/QtWidgets -I/opt/Qt/5.15.0/gcc_64/include/QtGui -I/opt/Qt/5.15.0/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../CentraleDalarme/clavier.h -o moc_clavier.cpp
@@ -966,6 +972,8 @@ moc_detecteur.cpp: ../CentraleDalarme/detecteur.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QMessageBox \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qmessagebox.h \
 		moc_predefs.h \
 		/opt/Qt/5.15.0/gcc_64/bin/moc
 	/opt/Qt/5.15.0/gcc_64/bin/moc $(DEFINES) --include /home/USERS/ELEVES/SNIR2019/apacot/Documents/QtProjects/IHM/TDs/CentraleAlarme/build-CentraleDalarme-Desktop_Qt_5_15_0_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++ -I/home/USERS/ELEVES/SNIR2019/apacot/Documents/QtProjects/IHM/TDs/CentraleAlarme/CentraleDalarme -I/opt/Qt/5.15.0/gcc_64/include -I/opt/Qt/5.15.0/gcc_64/include/QtWidgets -I/opt/Qt/5.15.0/gcc_64/include/QtGui -I/opt/Qt/5.15.0/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../CentraleDalarme/detecteur.h -o moc_detecteur.cpp
@@ -1100,8 +1108,132 @@ detecteur.o: ../CentraleDalarme/detecteur.cpp ../CentraleDalarme/detecteur.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_detecteur.h
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QMessageBox \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		ui_detecteur.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/QVariant \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QApplication \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qapplication.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qguiapplication.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qinputmethod.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QPushButton \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qpushbutton.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o detecteur.o ../CentraleDalarme/detecteur.cpp
+
+detecteurtemporise.o: ../CentraleDalarme/detecteurtemporise.cpp ../CentraleDalarme/detecteurtemporise.h \
+		../CentraleDalarme/detecteur.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qline.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QMessageBox \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qmessagebox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o detecteurtemporise.o ../CentraleDalarme/detecteurtemporise.cpp
 
 main.o: ../CentraleDalarme/main.cpp ../CentraleDalarme/clavier.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QWidget \
@@ -1213,6 +1345,8 @@ main.o: ../CentraleDalarme/main.cpp ../CentraleDalarme/clavier.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QTimer \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qtimer.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qbasictimer.h \
+		../CentraleDalarme/detecteur.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1332,6 +1466,8 @@ clavier.o: ../CentraleDalarme/clavier.cpp ../CentraleDalarme/clavier.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QTimer \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qtimer.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qbasictimer.h \
+		../CentraleDalarme/detecteur.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog \
 		ui_clavier.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QVariant \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QApplication \

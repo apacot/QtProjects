@@ -10,13 +10,15 @@ Clavier::Clavier(QWidget *parent)
     connect(ui->pushButton_1,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     //connect(ui->pushButton_2,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     //connect(ui->pushButton_3,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
-    connect(ui->pushButton_4,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
-    connect(ui->pushButton_5,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
+    //connect(ui->pushButton_4,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
+    //connect(ui->pushButton_5,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_6,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_7,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_8,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_9,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(&timerLed,&QTimer::timeout,this,&Clavier::onTimerLed_timeout);
+    leDetecteur = nullptr;
+    leDetecteurTempo = nullptr;
 }
 
 Clavier::~Clavier()
@@ -42,10 +44,10 @@ void Clavier::on_pushButton_Arret_clicked()
     //récuperer le contenu de la touche Arret
     QString texteBouton = ui->pushButton_Arret->text();
     // affichage d'un message lors de l'appuie sur la touche Arret
-    QMessageBox messageMarche;
-    messageMarche.setText("j'ai appuyé sur la touche " + texteBouton);
-    messageMarche.exec();
-    //ui->checkBoxLedRouge->setCheckState(Qt::Unchecked); //desactivation manuel de la "led rouge"
+    QMessageBox messageArret;
+    messageArret.setText("j'ai appuyé sur la touche " + texteBouton);
+    messageArret.exec();
+    ui->checkBoxLedRouge->setCheckState(Qt::Unchecked); //desactivation manuel de la "led rouge"
     timerLed.stop();
 
 }
@@ -75,12 +77,40 @@ void Clavier::onTimerLed_timeout()
 
 void Clavier::on_pushButton_2_clicked()
 {
-    leDetecteur = new Detecteur;
-    leDetecteur->show();
+    if(leDetecteur == nullptr)
+    {
+        leDetecteur = new Detecteur;
+        leDetecteur->show();
+    }
 }
 
 void Clavier::on_pushButton_3_clicked()
 {
-    leDetecteur->hide();
-    delete [] leDetecteur;
+    if(leDetecteur != nullptr)
+    {
+        leDetecteur->hide();
+        delete leDetecteur;
+        leDetecteur = nullptr;
+    }
+
+}
+
+void Clavier::on_pushButton_4_clicked()
+{
+    if(leDetecteurTempo == nullptr)
+    {
+        leDetecteurTempo = new DetecteurTemporise;
+        leDetecteurTempo->show();
+    }
+}
+
+void Clavier::on_pushButton_5_clicked()
+{
+    if(leDetecteurTempo != nullptr)
+    {
+        leDetecteurTempo->hide();
+        delete leDetecteurTempo;
+
+        leDetecteurTempo = nullptr;
+    }
 }

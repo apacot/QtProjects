@@ -13,3 +13,10 @@ Detecteur::~Detecteur()
 {
     delete ui;
 }
+
+void Detecteur::on_pushButtonIntrus_clicked()
+{
+    QMessageBox messageIntrus;
+    messageIntrus.setText("Intrus détecté");
+    messageIntrus.exec();
+}
