@@ -2,6 +2,8 @@
 #define EQUILIBREUSE_H
 
 #include <QMainWindow>
+#include "mcculdaq.h"
+#include "capot.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Equilibreuse; }
@@ -17,5 +19,9 @@ public:
 
 private:
     Ui::Equilibreuse *ui;
+    MccUldaq laCarte;
+    Capot *leCapot;
+private slots:
+    void onCapot_EtatCapotChange(bool EtatCapotChange);
 };
 #endif // EQUILIBREUSE_H
