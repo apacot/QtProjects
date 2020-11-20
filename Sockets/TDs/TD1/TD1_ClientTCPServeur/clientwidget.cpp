@@ -44,22 +44,26 @@ void ClientWidget::on_pushButtonConnexion_clicked()
 
 void ClientWidget::on_pushButtonArchitectProcess_clicked()
 {
-
+    typeDeDemande = 'a';
+    socDialServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::on_pushButtonNomOrdiDistant_clicked()
 {
-
+    typeDeDemande = 'c';
+    socDialServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::on_pushButtonNomUtilisateur_clicked()
 {
-
+    typeDeDemande = 'u';
+    socDialServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::on_pushButtonOsOrdi_clicked()
 {
-
+    typeDeDemande="o";
+    socDialServeur->write(typeDeDemande.toLatin1());
 }
 
 void ClientWidget::onQTcpSocket_connected()
