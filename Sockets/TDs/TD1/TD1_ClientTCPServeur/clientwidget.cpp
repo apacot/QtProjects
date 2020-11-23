@@ -9,7 +9,7 @@ ClientWidget::ClientWidget(QWidget *parent)
     socDialServeur = new QTcpSocket;
     connect(socDialServeur,&QTcpSocket::connected,this,&ClientWidget::onQTcpSocket_connected);
     connect(socDialServeur,&QTcpSocket::disconnected,this,&ClientWidget::onQTcpSocket_disconnected);
-    connect(socDialServeur, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this, &ClientWidget::onQTcpSocket_error);
+    connect(socDialServeur,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this, &ClientWidget::onQTcpSocket_error);
     connect(socDialServeur,&QTcpSocket::hostFound,this,&ClientWidget::onQTcpSocket_hostFound);
     connect(socDialServeur,&QTcpSocket::stateChanged,this,&ClientWidget::onQTcpSocket_stateChanged);
     connect(socDialServeur,&QTcpSocket::aboutToClose,this,&ClientWidget::onQTcpSocket_aboutToClose);
@@ -76,7 +76,7 @@ void ClientWidget::onQTcpSocket_disconnected()
 
 void ClientWidget::onQTcpSocket_error(QAbstractSocket::SocketError socketError)
 {
-    //ui->textEditEtatConnexion->append(socDialServeur->errorString());
+    ui->textEditEtatConnexion->append(socDialServeur->errorString());
 }
 
 void ClientWidget::onQTcpSocket_hostFound()
