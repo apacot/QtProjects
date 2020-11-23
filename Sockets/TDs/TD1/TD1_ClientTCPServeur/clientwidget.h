@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QHostAddress>
 #include <QTcpSocket>
+#include <QString>
+#include <QByteArray>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ClientWidget; }

@@ -6,18 +6,16 @@ ClientWidget::ClientWidget(QWidget *parent)
     , ui(new Ui::ClientWidget)
 {
     ui->setupUi(this);
-    socDialServeur = new QTcpSocket();
-    connect(socDialServeur,QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
-            this,&ClientWidget::onQTcpSocket_error);
+    socDialServeur = new QTcpSocket;
     connect(socDialServeur,&QTcpSocket::connected,this,&ClientWidget::onQTcpSocket_connected);
     connect(socDialServeur,&QTcpSocket::disconnected,this,&ClientWidget::onQTcpSocket_disconnected);
+    connect(socDialServeur, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this, &ClientWidget::onQTcpSocket_error);
     connect(socDialServeur,&QTcpSocket::hostFound,this,&ClientWidget::onQTcpSocket_hostFound);
     connect(socDialServeur,&QTcpSocket::stateChanged,this,&ClientWidget::onQTcpSocket_stateChanged);
     connect(socDialServeur,&QTcpSocket::aboutToClose,this,&ClientWidget::onQTcpSocket_aboutToClose);
     connect(socDialServeur,&QTcpSocket::bytesWritten,this,&ClientWidget::onQTcpSocket_bytesWritten);
     connect(socDialServeur,&QTcpSocket::readChannelFinished,this,&ClientWidget::onQTcpSocket_readChannelFinished);
     connect(socDialServeur,&QTcpSocket::readyRead,this,&ClientWidget::onQTcpSocket_readyRead);
-
 }
 
 ClientWidget::~ClientWidget()
@@ -78,7 +76,7 @@ void ClientWidget::onQTcpSocket_disconnected()
 
 void ClientWidget::onQTcpSocket_error(QAbstractSocket::SocketError socketError)
 {
-    ui->textEditEtatConnexion->append(socDialServeur->errorString());
+    //ui->textEditEtatConnexion->append(socDialServeur->errorString());
 }
 
 void ClientWidget::onQTcpSocket_hostFound()
@@ -118,20 +116,36 @@ void ClientWidget::onQTcpSocket_stateChanged(QAbstractSocket::SocketState socket
 
 void ClientWidget::onQTcpSocket_aboutToClose()
 {
-
+    ui->textEditEtatConnexion->append("L'appareil va s'éteindre");
 }
 
 void ClientWidget::onQTcpSocket_bytesWritten(qint64 bytes)
 {
-
+    ui->textEditEtatConnexion->append("Des données sont en train d'être écrite sur le canal d'écriture");
 }
 
 void ClientWidget::onQTcpSocket_readChannelFinished()
 {
-
+    ui->textEditEtatConnexion->append("La lecture est finie");
 }
 
 void ClientWidget::onQTcpSocket_readyRead()
 {
+    ui->textEditEtatConnexion->append("Des données sont disponibles à la lecture");
+    QByteArray data = socDialServeur->readAll();
 
+    switch (typeDeDemande.at(0).toLatin1()) {
+    case 'u':
+        ui->lineEditNomUser->setText(data);
+        break;
+    case 'c':
+        ui->lineEditNomOrdiDist->setText(data);
+        break;
+    case 'o':
+        ui->lineEditOsOrdi->setText(data);
+        break;
+    case 'a':
+        ui->lineEditArchitectProco->setText(data);
+        break;
+    }
 }
