@@ -131,21 +131,20 @@ void ClientWidget::onQTcpSocket_readChannelFinished()
 
 void ClientWidget::onQTcpSocket_readyRead()
 {
-    ui->textEditEtatConnexion->append("Des données sont disponibles à la lecture");
-    QByteArray data = socDialServeur->readAll();
+    QByteArray buffer = socDialServeur->readAll();
 
     switch (typeDeDemande.at(0).toLatin1()) {
     case 'u':
-        ui->lineEditNomUser->setText(data);
+        ui->lineEditNomUser->setText(buffer.data());
         break;
     case 'c':
-        ui->lineEditNomOrdiDist->setText(data);
+        ui->lineEditNomOrdiDist->setText(buffer.data());
         break;
     case 'o':
-        ui->lineEditOsOrdi->setText(data);
+        ui->lineEditOsOrdi->setText(buffer.data());
         break;
     case 'a':
-        ui->lineEditArchitectProco->setText(data);
+        ui->lineEditArchitectProco->setText(buffer.data());
         break;
     }
 }
