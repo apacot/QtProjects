@@ -60,27 +60,7 @@ void DAB_MainWindow::onQTcpSocket_error(QAbstractSocket::SocketError socketError
 
 }
 
-void DAB_MainWindow::onQTcpSocket_hostFound()
-{
-
-}
-
 void DAB_MainWindow::onQTcpSocket_stateChanged(QAbstractSocket::SocketState socketState)
-{
-
-}
-
-void DAB_MainWindow::onQTcpSocket_aboutToClose()
-{
-
-}
-
-void DAB_MainWindow::onQTcpSocket_bytesWritten(qint64 bytes)
-{
-
-}
-
-void DAB_MainWindow::onQTcpSocket_readChannelFinished()
 {
 
 }

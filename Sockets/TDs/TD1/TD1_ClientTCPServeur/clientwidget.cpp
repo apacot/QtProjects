@@ -131,20 +131,49 @@ void ClientWidget::onQTcpSocket_readChannelFinished()
 
 void ClientWidget::onQTcpSocket_readyRead()
 {
-    QByteArray buffer = socDialServeur->readAll();
+    QByteArray data = socDialServeur->readAll();
 
     switch (typeDeDemande.at(0).toLatin1()) {
     case 'u':
-        ui->lineEditNomUser->setText(buffer.data());
+        ui->lineEditNomUser->setText(data);
         break;
     case 'c':
-        ui->lineEditNomOrdiDist->setText(buffer.data());
+        ui->lineEditNomOrdiDist->setText(data);
         break;
     case 'o':
-        ui->lineEditOsOrdi->setText(buffer.data());
+        ui->lineEditOsOrdi->setText(data);
         break;
     case 'a':
-        ui->lineEditArchitectProco->setText(buffer.data());
+        ui->lineEditArchitectProco->setText(data);
         break;
     }
+
+ /*
+     Correction Synthèse
+
+     QByteArray buffer;
+     if(socDialServeur->bytesAvailable() >0)
+     {
+         buffer = socDialServeur->readAll();
+     }
+     if(typeDeDemande=="u")
+     {
+         ui->lineEditNomUser->setText(buffer.data()); //QString::fromUtf8(buffer.data())
+     }
+     if(typeDeDemande=="c")
+     {
+         ui->lineEditNomOrdiDist->setText(buffer.data()); //QString::fromUtf8(buffer.data())
+     }
+     if(typeDeDemande=="o")
+     {
+         ui->lineEditOsOrdi->setText(buffer.data()); //QString::fromUtf8(buffer.data())
+     }
+     if(typeDeDemande=="a")
+     {
+         ui->lineEditArchitectProco->setText(buffer.data()); //QString::fromUtf8(buffer.data())
+     }
+*/
+
+
+
 }
