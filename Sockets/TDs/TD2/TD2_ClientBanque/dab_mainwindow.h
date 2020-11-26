@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QHostAddress>
 #include <QTcpSocket>
+#include <QBuffer>
+#include <QDataStream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class DAB_MainWindow; }

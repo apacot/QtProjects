@@ -36,7 +36,7 @@ void ClientWidget::on_pushButtonConnexion_clicked()
     else
     {
         socDialServeur->disconnectFromHost();
-        ui->pushButtonConnexion->setText("Connexion");
+
     }
 }
 
@@ -66,12 +66,12 @@ void ClientWidget::on_pushButtonOsOrdi_clicked()
 
 void ClientWidget::onQTcpSocket_connected()
 {
-    ui->textEditEtatConnexion->append("Connecté");
+    ui->pushButtonConnexion->setText("Déconnexion");
 }
 
 void ClientWidget::onQTcpSocket_disconnected()
 {
-    ui->textEditEtatConnexion->append("Déconnecté");
+    ui->pushButtonConnexion->setText("Connexion");
 }
 
 void ClientWidget::onQTcpSocket_error(QAbstractSocket::SocketError socketError)

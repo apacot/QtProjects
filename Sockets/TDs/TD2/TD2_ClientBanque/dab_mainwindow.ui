@@ -94,7 +94,7 @@
       <string>Envoi</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -119,7 +119,7 @@
         <item>
          <widget class="QLabel" name="labelMontant">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Montant :</string>
           </property>
          </widget>
         </item>
@@ -128,16 +128,24 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLineEdit" name="lineEditNumCompte"/>
+         <widget class="QLineEdit" name="lineEditNumCompte">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEditMontant"/>
+         <widget class="QLineEdit" name="lineEditMontant">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>460</x>
@@ -149,6 +157,9 @@
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
        <widget class="QRadioButton" name="radioButtonSolde">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Solde</string>
         </property>
@@ -156,6 +167,9 @@
       </item>
       <item>
        <widget class="QRadioButton" name="radioButtonRetrait">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Retrait</string>
         </property>
@@ -163,6 +177,9 @@
       </item>
       <item>
        <widget class="QRadioButton" name="radioButtonDepot">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Dépot</string>
         </property>
@@ -181,7 +198,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
