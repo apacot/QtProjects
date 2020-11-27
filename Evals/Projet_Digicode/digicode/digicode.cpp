@@ -96,7 +96,7 @@ void digicode::onQPushButtonClicked()
                             touches[ligne][colonne]->setEnabled(false);
                         }
                     }
-                    tempoVerrouillage.start(60000);
+                    tempoVerrouillage.start(6000);
                     QMessageBox message;
                     message.setText("3 Erreurs !");
                     message.exec();

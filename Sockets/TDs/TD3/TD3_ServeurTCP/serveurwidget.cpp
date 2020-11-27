@@ -28,6 +28,17 @@ void ServeurWidget::onQTcpSocket_disconnected()
 
 }
 
+void ServeurWidget::onQProcess_readyReadStandardOutput()
+{
+    QString reponse = process->readAllStandardOutput();
+    if(!reponse.isEmpty())
+    {
+    QString message = "Réponse envoyée à " + socDialClient->peerAddress().toString()+" : " + reponse;
+    ui->textEditClients->append(message);
+    socDialClient->write(reponse.toLatin1());
+    }
+}
+
 
 void ServeurWidget::on_pushButtonLancerServeur_clicked()
 {
