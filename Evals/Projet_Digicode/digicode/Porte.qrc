@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>porte_fermee.png</file>
+        <file>porte_ouverte.png</file>
+    </qresource>
+</RCC>
