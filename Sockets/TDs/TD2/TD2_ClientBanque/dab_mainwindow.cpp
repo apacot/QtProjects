@@ -219,8 +219,8 @@ void DAB_MainWindow::on_pushButtonNumCompte_clicked()
 {
     quint16 taille=0;
     QChar commande='N';
-    int compte = 1234; //num de compte automatiquement mis sur 1234
-    //int compte = ui->lineEditNumCompte->text().toInt(); //Rentrer manuellement son num de compte
+    //int compte = 1234; //num de compte automatiquement mis sur 1234
+    int compte = ui->lineEditNumCompte->text().toInt(); //Rentrer manuellement son num de compte
     QBuffer tampon;
     tampon.open(QIODevice::WriteOnly);
 

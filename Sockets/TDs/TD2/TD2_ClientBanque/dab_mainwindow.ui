@@ -188,7 +188,7 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QListWidget" name="listWidgetEtaConnexion">
+   <widget class="QListWidget" name="listWidgetEtatConnexion">
     <property name="geometry">
      <rect>
       <x>270</x>

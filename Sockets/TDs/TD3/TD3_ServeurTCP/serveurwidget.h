@@ -5,6 +5,8 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QProcess>
+#include <QString>
+#include <QHostInfo>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ServeurWidget; }
