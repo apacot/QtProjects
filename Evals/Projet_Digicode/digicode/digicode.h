@@ -38,5 +38,6 @@ private:
     QTimer tempoGache;
     QTimer tempoVerrouillage;
     int nbErreur = 0;
+    void closeEvent(QCloseEvent *event) override;
 };
 #endif // DIGICODE_H

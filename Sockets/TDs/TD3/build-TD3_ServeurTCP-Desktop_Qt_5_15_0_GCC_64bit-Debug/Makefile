@@ -855,6 +855,7 @@ moc_serveurwidget.cpp: ../TD3_ServeurTCP/serveurwidget.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QString \
 		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QHostInfo \
 		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qhostinfo.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/QDebug \
 		moc_predefs.h \
 		/opt/Qt/5.15.0/gcc_64/bin/moc
 	/opt/Qt/5.15.0/gcc_64/bin/moc $(DEFINES) --include /home/USERS/ELEVES/SNIR2019/apacot/Documents/QtProjects/Sockets/TDs/TD3/build-TD3_ServeurTCP-Desktop_Qt_5_15_0_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/5.15.0/gcc_64/mkspecs/linux-g++ -I/home/USERS/ELEVES/SNIR2019/apacot/Documents/QtProjects/Sockets/TDs/TD3/TD3_ServeurTCP -I/opt/Qt/5.15.0/gcc_64/include -I/opt/Qt/5.15.0/gcc_64/include/QtWidgets -I/opt/Qt/5.15.0/gcc_64/include/QtGui -I/opt/Qt/5.15.0/gcc_64/include/QtNetwork -I/opt/Qt/5.15.0/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../TD3_ServeurTCP/serveurwidget.h -o moc_serveurwidget.cpp
@@ -997,6 +998,7 @@ main.o: ../TD3_ServeurTCP/main.cpp ../TD3_ServeurTCP/serveurwidget.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QString \
 		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QHostInfo \
 		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qhostinfo.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/QDebug \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt/5.15.0/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1123,6 +1125,7 @@ serveurwidget.o: ../TD3_ServeurTCP/serveurwidget.cpp ../TD3_ServeurTCP/serveurwi
 		/opt/Qt/5.15.0/gcc_64/include/QtCore/QString \
 		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/QHostInfo \
 		/opt/Qt/5.15.0/gcc_64/include/QtNetwork/qhostinfo.h \
+		/opt/Qt/5.15.0/gcc_64/include/QtCore/QDebug \
 		ui_serveurwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o serveurwidget.o ../TD3_ServeurTCP/serveurwidget.cpp
 
