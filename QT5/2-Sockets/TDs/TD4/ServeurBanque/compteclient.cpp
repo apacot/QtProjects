@@ -14,7 +14,7 @@ CompteClient::~CompteClient()
 bool CompteClient::Retirer(float montant)
 {
     bool retour;
-    if(solde < montant)
+    if(montant <= solde)
     {
         solde -= montant;
         retour = true;

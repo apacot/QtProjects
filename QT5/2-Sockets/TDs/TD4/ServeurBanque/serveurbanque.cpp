@@ -63,6 +63,7 @@ void ServeurBanque::onServeurBanque_newConnection()
         connect(client,&QTcpSocket::disconnected,this,&ServeurBanque::onCompteClient_disconnected);
         lesConnexionsClients.append(client);
         envoyerMessage("Quel est votre numéro de compte ?",client);
+        qDebug() << "Un client est connecté";
     }
 }
 
@@ -84,5 +85,63 @@ void ServeurBanque::onCompteClient_disconnected()
 
 void ServeurBanque::onCompteClient_readyRead()
 {
+    quint16 taille = 0;
+    QChar commande;
+    QString reponse;
+    float montant;
+    int numCompte;
+    CompteClient *client = (CompteClient *)sender();
 
+    if(!client)
+    {
+        QMessageBox message;
+        message.setText("Erreur de lecture : "+client->errorString());
+        message.exec();
+    }
+    else
+    {
+        if(client->bytesAvailable() > 0)
+        {
+            QDataStream in(client);
+            in>>taille;
+            in>>commande;
+            switch(commande.toLatin1())
+            {
+            case 'N' :
+                in >> numCompte;
+                break;
+            case 'R':
+                in >> montant;
+                break;
+            case 'D':
+                in >> montant;
+                break;
+            }
+        }
+        //envoyer un message en fonction de la demande du client
+        switch (commande.toLatin1())
+        {
+        case 'N':
+            client->DefinirNumCompte(numCompte);
+            envoyerMessage("Bienvenue sur le compte " + QString::number(numCompte),client);
+            qDebug() << "Message de bienvenue envoyé";
+            break;
+        case 'R':
+            if(montant > 0)
+            client->Retirer(montant);
+            envoyerMessage("nouveau solde " + QString::number(client->ObtenirSolde()),client);
+            qDebug()<< "Solde après retrait envoyé";
+            break;
+        case 'D':
+            client->Deposer(montant);
+            envoyerMessage("nouveau solde "+QString::number(client->ObtenirSolde()),client);
+            qDebug()<< "solde après dépot envoyé";
+            break;
+        case 'S':
+            envoyerMessage("Solde "+QString::number(client->ObtenirSolde()),client);
+            qDebug() << "Solde envoyé";
+            break;
+
+        }
+    }
 }
