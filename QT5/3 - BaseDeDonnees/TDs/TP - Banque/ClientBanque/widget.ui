@@ -38,7 +38,7 @@
      <string>Connexion à la base de données</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -184,15 +184,35 @@
      <string>Afficher les informations de tous les comptes</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEditInfos">
+   <widget class="QTableWidget" name="tableWidgetInfos">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>491</width>
+      <width>481</width>
       <height>151</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string>Nom</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Prénom</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Numéro de compte</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Solde</string>
+     </property>
+    </column>
    </widget>
   </widget>
  </widget>

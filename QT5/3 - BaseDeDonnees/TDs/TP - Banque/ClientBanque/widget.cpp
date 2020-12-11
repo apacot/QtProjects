@@ -42,22 +42,34 @@ void Widget::on_pushButtonConnexionBDD_clicked()
 
 void Widget::on_pushButtonAfficheInfos_clicked()
 {
-    QSqlQuery requete;
-    requete.prepare("select * from comptes;");
+    QSqlQuery requete("select solde, nom, prenom, idCompte from comptes;");
     if(!requete.exec())
     {
         QMessageBox msgError;
-        msgError.setText("pb requete select " + bdd.lastError().text());
+        msgError.setText("pb requete select " + requete.lastError().text());
         msgError.exec();
     }
-    else
+    int ligne=0;    // numero de la ligne
+    while(requete.next())
     {
-        while(requete.next())
-        {
-            ui->textEditInfos->append(requete.value("nom").toString());//récuperer la valeur de la requête et la convertir en texte
-            ui->textEditInfos->append(requete.value("prenom").toString());//récuperer la valeur de la requête et la convertir en texte
-            ui->textEditInfos->append(requete.value("idCompte").toString());//récuperer la valeur de la requête et la convertir en texte
-            ui->textEditInfos->append(requete.value("solde").toString());//récuperer la valeur de la requête et la convertir en texte
-        }
+        //ajouter une ligne au tableau
+        ui->tableWidgetInfos->insertRow(ui->tableWidgetInfos->rowCount());
+        int col=0;      // numero de la colonne
+        //ajouter un nom
+        QTableWidgetItem *nomItem = new QTableWidgetItem(requete.value("nom").toString());
+        ui->tableWidgetInfos->setItem(ligne,col,nomItem);
+        col++;
+        //ajouter un prenom
+        QTableWidgetItem *prenomItem = new QTableWidgetItem(requete.value("prenom").toString());
+        ui->tableWidgetInfos->setItem(ligne,col,prenomItem);
+        col++;
+        //ajouter le numero de compte
+        QTableWidgetItem *idCompteItem = new QTableWidgetItem(requete.value("idCompte").toString());
+        ui->tableWidgetInfos->setItem(ligne,col,idCompteItem);
+        col++;
+        //ajouter le solde
+        QTableWidgetItem *soldeItem = new QTableWidgetItem(requete.value("solde").toString());
+        ui->tableWidgetInfos->setItem(ligne,col,soldeItem);
+        ligne++;
     }
 }
