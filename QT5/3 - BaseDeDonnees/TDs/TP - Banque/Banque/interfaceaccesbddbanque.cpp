@@ -2,35 +2,62 @@
 
 InterfaceAccesBDDBanque::InterfaceAccesBDDBanque(QString hote, QString bd, QString login, QString mdp)
 {
-    bdd=QSqlDatabase::addDatabase("QMYSQL");
-    bdd.setHostName(hote);
-    bdd.setDatabaseName(bd),
-            bdd.setUserName(login);
-    bdd.setPassword(mdp);
+
 }
 
 float InterfaceAccesBDDBanque::ObtenirSolde(int numCompte)
 {
-    float solde;
-    QSqlQuery requete("select solde from comptes where idCompte = :nc;");
-    requete.bindValue(":nc",numCompte);
-
-    if(!requete.exec())
+    float solde = 0;
+    if(CompteExiste(numCompte))
     {
-        QMessageBox msg;
-        msg.setText("Le compte n'existe pas !");
-        msg.exec();
+
+        QSqlQuery requete("select solde from comptes where idCompte = :nc;");
+        requete.bindValue(":nc",numCompte);
+
+        if(!requete.exec())
+        {
+            QMessageBox msg;
+            msg.setText("pb requete" + requete.lastError().text());
+            msg.exec();
+        }
+        else
+        {
+            solde = requete.value("solde").toFloat();
+
+        }
     }
     else
     {
-        solde = requete.value("solde").toFloat();
+        QMessageBox msg;
+        msg.setText("le compte n'existe pas !");
+        msg.exec();
     }
     return solde;
 }
-
 void InterfaceAccesBDDBanque::MajSolde(int numCompte, float nouveauSolde)
 {
-
+    if(CompteExiste(numCompte))
+    {
+        QSqlQuery requete("update comptes set solde = ':ns' where idCompte = :nc;");
+        requete.bindValue(":nc",numCompte);
+        requete.bindValue(":ns",nouveauSolde);
+        if(!requete.exec())
+        {
+            QMessageBox msg;
+            msg.setText("pb requete" + requete.lastError().text());
+            msg.exec();
+        }
+        else
+        {
+           requete.value("solde").toFloat();
+        }
+    }
+    else
+    {
+        QMessageBox msg;
+        msg.setText("le compte n'existe pas !");
+        msg.exec();
+    }
 }
 
 void InterfaceAccesBDDBanque::CreerCompte(int numCompte)
@@ -64,5 +91,18 @@ void InterfaceAccesBDDBanque::CreerCompte(int numCompte)
 
 bool InterfaceAccesBDDBanque::CompteExiste(int numCompte)
 {
-
+        QSqlQuery requete;
+        bool existe=false;
+        requete.prepare("select solde from comptes where idCompte=:id;");
+        requete.bindValue(":id",numCompte);
+        requete.exec();
+        if (!requete.exec()){
+            qDebug()<<"pb requete compte existe "<<requete.lastError();
+        }
+        // si le compte existe on passe existe a vrai
+        if (requete.size()!=0)
+        {
+            existe=true;
+        }
+        return existe;
 }

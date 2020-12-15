@@ -7,8 +7,6 @@
 #include <QString>
 #include <QMessageBox>
 #include <QDebug>
-#include "compteclient.h"
-
 class InterfaceAccesBDDBanque
 {
 public:

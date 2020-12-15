@@ -14,9 +14,10 @@ CompteClient::~CompteClient()
 bool CompteClient::Retirer(float montant)
 {
     bool retour;
-    if(montant <= solde)
+    if(montant <= bdd.ObtenirSolde(numCompte))
     {
-        solde -= montant;
+        montant = montant*-1; //c'est un retrait, le montant est donc soustrait, c'est une valeur négative
+        bdd.MajSolde(numCompte,montant);
         retour = true;
     }
     else
@@ -28,7 +29,7 @@ bool CompteClient::Retirer(float montant)
 
 void CompteClient::Deposer(float montant)
 {
-    solde += montant;
+    bdd.MajSolde(numCompte,montant);
 }
 
 float CompteClient::ObtenirSolde()
@@ -38,8 +39,8 @@ float CompteClient::ObtenirSolde()
 
 void CompteClient::DefinirNumCompte(int nc)
 {
-    numCompte = nc;
-    solde = 200;
+    bdd.CreerCompte(nc);
+    bdd.ObtenirSolde(nc);
 }
 
 int CompteClient::ObtenirNumCompte()
