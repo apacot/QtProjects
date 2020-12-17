@@ -79,6 +79,7 @@ private:
     UlError InitAIn();
     // Compteur
     UlError InitCtr();
+
 };
 
 #endif // MCCULDAQ_H
