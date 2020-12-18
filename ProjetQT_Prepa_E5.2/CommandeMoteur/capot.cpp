@@ -10,5 +10,5 @@ Capot::Capot(const MccUldaq & _laCarte, const int _numDio, QObject *parent):
 
 void Capot::onTimerCapot_timeout()
 {
-
+    bool etatCourant;
 }

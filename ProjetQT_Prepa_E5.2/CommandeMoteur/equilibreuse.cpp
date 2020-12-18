@@ -16,3 +16,8 @@ Equilibreuse::~Equilibreuse()
     delete leCapot;
 }
 
+void Equilibreuse::onCapot_EtatCapotChange(bool EtatCapotChange)
+{
+
+}
+

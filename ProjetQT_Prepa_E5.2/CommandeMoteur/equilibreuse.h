@@ -21,6 +21,7 @@ private:
     Ui::Equilibreuse *ui;
     MccUldaq laCarte;
     Capot *leCapot;
+
 private slots:
     void onCapot_EtatCapotChange(bool EtatCapotChange);
 };
