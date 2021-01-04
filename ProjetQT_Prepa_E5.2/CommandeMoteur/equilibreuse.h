@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "mcculdaq.h"
 #include "capot.h"
+#include "moteur.h"
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Equilibreuse; }
@@ -21,8 +23,12 @@ private:
     Ui::Equilibreuse *ui;
     MccUldaq laCarte;
     Capot *leCapot;
+    QLabel labelEtatCapot;
+    Moteur *leMoteur;
 
 private slots:
     void onCapot_EtatCapotChange(bool EtatCapotChange);
+    void on_pushButton_Arreter_clicked();
+    void on_pushButton_Lancer_clicked();
 };
 #endif // EQUILIBREUSE_H

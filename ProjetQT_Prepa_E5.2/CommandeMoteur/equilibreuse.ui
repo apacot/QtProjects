@@ -13,10 +13,77 @@
   <property name="windowTitle">
    <string>Equilibreuse</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>81</y>
+      <width>204</width>
+      <height>136</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QDial" name="dial_consigneVitesse"/>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="lcdNumber_consigne"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="pushButton_Lancer">
+         <property name="text">
+          <string>Lancer Moteur</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_Arreter">
+         <property name="text">
+          <string>Arrêter Moteur</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>dial_consigneVitesse</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber_consigne</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>149</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>222</x>
+     <y>162</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
